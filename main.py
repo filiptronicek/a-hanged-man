@@ -6,7 +6,7 @@ import collections
 
 wordslist = 'english'
 
-f = open(wordslist+'.txt') # Open file on read mode
+f = open('wordlists/'+wordslist+'.txt') # Open file on read mode
 words_list = f.read().split("\n") # Create a list containing all lines
 f.close() # Close file
 
@@ -41,6 +41,8 @@ for item in sorted_by_second:
 rightGuesses = 0
 
 print(sortedChars)
+
+arararar = ['_','_','_']
 
 def guessRecurs(pos:int, rightGuesses, badGuesses):
     if rightGuesses < len(correct): currLtr = sortedChars[pos]
