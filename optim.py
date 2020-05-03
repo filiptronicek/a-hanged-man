@@ -30,12 +30,11 @@ def FillIn(char, pos):
     print(finalString)
 
 def recompile(wlist):
+    print("got a list of length",str(len(wlist)))
     wl = []
     for w in (wlist):
         if len(w) == len(correct):
-            for b in bad:
-                if b not in w:
-                    wl.append(w)
+            wl.append(w)
         
     wlist = wl
     for u in finalString:
@@ -62,10 +61,8 @@ def rightGuesses():
         if letter != "_":
             rGuesses += 1
     return rGuesses
-def getMostFrequent(wlist, init=False):
+def getMostFrequent(wlist):
     freqchar = []
-    if not init:
-        wlist = recompile(wlist)
     for w in wlist:
         #if len(w) == len(correct):
         #freqchar = collections.Counter(w).most_common(len(set(w))))
@@ -82,10 +79,12 @@ def getMostFrequent(wlist, init=False):
     filtered = filter(filterOut, sortedChars) 
     return list(filtered)
 
-def loop(tas):
+def loop(tas, wList):
+    print("sending a list of",str(len(wList)))
+    wList = recompile(wList)
     if rightGuesses() < len(correct):
         try:
-            letter = getMostFrequent(words_list, True)[tas]
+            letter = getMostFrequent(wList)[tas]
             tas += 1
         except IndexError:
             print("out of thing")
@@ -96,8 +95,8 @@ def loop(tas):
             print("used:"+str(used))
             print("bad:"+str(bad))
             takeGuess(letter)
-        if len(used) != 26:
-            loop(tas)
+    if len(used) != 26:
+        loop(tas, wList)
             
-loop(0)
-print(str(100*rightGuesses()/len(used))+"%")
+loop(0, words_list)
+#print(str(100*rightGuesses()/len(used))+"%")
